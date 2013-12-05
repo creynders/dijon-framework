@@ -587,7 +587,29 @@
             }
 
             return this;
-        }
+        },
+
+        mapCommand: function ( eventName, commandClass, executionFunc, passEvent )
+		{
+			var key = eventName + "_command";
+			var handler = executionFunc || "execute";
+
+			this.mapClass( key, commandClass );
+			this.mapHandler( eventName, key, handler, false, passEvent );
+
+			return this;
+		},
+
+		unmapCommand: function ( eventName, commandClass, executionFunc )
+		{
+			var key = eventName + "_command";
+			var handler = executionFunc || "execute";
+
+			this.unmap( key );
+			this.unmapHandler( eventName, key, handler );
+
+			return this;
+		}
 
     };//dijon.System.prototype
 
